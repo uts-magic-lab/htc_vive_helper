@@ -37,20 +37,21 @@ from htc_vive_helper.controller import ViveController
 # You can set callbacks to any of the events
 def my_callback(value):
     print("Callback got value: " + str(value))
-vc = ViveController(on_trigger_press=my_callback,
-                 on_trigger_change=None,
-                 on_trigger_release=None,
-                 on_menu_press=None,
-                 on_menu_change=None,
-                 on_menu_release=None,
-                 on_touchpad_touch=None,
-                 on_touchpad_press=None,
-                 on_touchpad_unpress=None,
-                 on_touchpad_release=None,
-                 on_touchpad_change=None,
-                 on_gripper_press=None,
-                 on_gripper_change=None,
-                 on_gripper_release=None)
+vc = ViveController('/vive_left'
+                    on_trigger_press=my_callback,
+                    on_trigger_change=None,
+                    on_trigger_release=None,
+                    on_menu_press=None,
+                    on_menu_change=None,
+                    on_menu_release=None,
+                    on_touchpad_touch=None,
+                    on_touchpad_press=None,
+                    on_touchpad_unpress=None,
+                    on_touchpad_release=None,
+                    on_touchpad_change=None,
+                    on_gripper_press=None,
+                    on_gripper_change=None,
+                    on_gripper_release=None)
 # You can also query for the last known state
 vc.get_trigger()
 vc.get_touchpad_x_y()

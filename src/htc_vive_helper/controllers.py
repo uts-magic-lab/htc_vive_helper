@@ -30,7 +30,8 @@ class ViveController(object):
     MENU_ID = 3
     GRIPPER_ID = 4
 
-    def __init__(self, on_trigger_press=None,
+    def __init__(self, controller_topic,
+                 on_trigger_press=None,
                  on_trigger_change=None,
                  on_trigger_release=None,
                  on_menu_press=None,
@@ -45,7 +46,7 @@ class ViveController(object):
                  on_gripper_change=None,
                  on_gripper_release=None):
         """
-
+        Class to manage a HTC Vive Controller with ease.
         """
         self._on_trigger_press = on_trigger_press
         self._on_trigger_change = on_trigger_change
@@ -65,7 +66,7 @@ class ViveController(object):
         self.last_joy = Joy()
         self.last_joy.axes = [0.0] * 3
         self.last_joy.buttons = [0] * 5
-        self.joy_sub = rospy.Subscriber('/vive_left',
+        self.joy_sub = rospy.Subscriber(controller_topic,
                                         Joy,
                                         self._joy_cb,
                                         queue_size=1)
@@ -253,7 +254,7 @@ if __name__ == '__main__':
 # print news
 
     # Try simple methods with no callbacks
-    vc = ViveController()
+    vc = ViveController('/vive_left')
     # Give time to initialize
     rospy.sleep(1.0)
     # Initial publish
@@ -284,7 +285,8 @@ if __name__ == '__main__':
     print("vc.is_gripper_pressed(): " + str(vc.is_gripper_pressed()))
 
     # Try callbacks
-    vc = ViveController(on_trigger_press=create_cb('on_trigger_press'),
+    vc = ViveController('/vive_left',
+                        on_trigger_press=create_cb('on_trigger_press'),
                         on_trigger_change=create_cb('on_trigger_change'),
                         on_trigger_release=create_cb('on_trigger_release'),
                         on_menu_press=create_cb('on_menu_press'),
