@@ -16,6 +16,16 @@ Usage:
 ./frame_as_odometry.py frame_to_odometry reference_frame [rate]
 ```
 
+Usage in launch file:
+```xml
+<launch>
+  <node name="left_controller_ps" 
+    pkg="htc_vive_helper" 
+    type="frame_as_posestamped.py"
+    args="left_controller hmd 30"/>
+</launch>
+```
+
 ## Useful classes
 
 ### Class to manage HTC Vive controllers
